@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Pantho 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ff6b9d, #ff8fab);
+            padding: 8px;
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .photo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2d1f3d, #1a1a2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .photo-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .subtitle {
+            color: #ff6b9d;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .game-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 50px rgba(214, 51, 132, 0.3);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .question {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            color: #d63384;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 60px;
+        }
+
+        .btn {
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-yes {
+            background: linear-gradient(145deg, #ff6b9d, #d63384);
+            color: white;
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(214, 51, 132, 0.6);
+        }
+
+        .btn-no {
+            background: linear-gradient(145deg, #adb5bd, #868e96);
+            color: white;
+            box-shadow: 0 8px 20px rgba(134, 142, 150, 0.4);
+            position: absolute;
+            left: 50%;
+            transform: translateX(80px);
+            transition: all 0.1s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-screen {
+            text-align: center;
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .success-screen h2 {
+            color: #d63384;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            margin-bottom: 15px;
+        }
+
+        .success-screen p {
+            color: #ff6b9d;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .big-heart {
+            font-size: 5rem;
+            animation: pulse 0.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .celebration {
+            position: fixed;
+            font-size: 2rem;
+            animation: fall 3s linear forwards;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        .run-text {
+            color: #868e96;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ffc4d6;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #d63384);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="photo-frame">
+            <div class="photo-inner" id="photo-container">
+                <!-- Uses the requested image, but falls back to emoji if not found in the environment -->
+                <img src="couple.jpg" alt="Us" onerror="document.getElementById('photo-container').innerHTML = '💑'; document.getElementById('photo-container').style.fontSize = '5rem';">
+            </div>
+        </div>
+        
+        <h1>Hey Pantho! 💕</h1>
+        <p class="subtitle">I have something important to ask you...</p>
+
+        <div class="game-section" id="game-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 0%"></div>
+            </div>
+
+            <!-- Question 1: Love -->
+            <div id="q1">
+                <p class="question">Do you love me? 🥺</p>
+                <div class="buttons">
+                    <button class="btn btn-yes" onclick="answerYes(1)">Yes! 💕</button>
+                    <button class="btn btn-no" id="noBtn1" onmouseover="runAway(1)">No</button>
+                </div>
+                <p class="run-text" id="run-text1"></p>
+            </div>
+
+            <!-- Question 2: Marriage -->
+            <div id="q2" class="hidden">
+                <p class="question">Will you marry me? 💍</p>
+                <div class="buttons">
+                    <button class="btn btn-yes" onclick="answerYes(2)">Yes! 💍💕</button>
+                    <button class="btn btn-no" id="noBtn2" onmouseover="runAway(2)">No</button>
+                </div>
+                <p class="run-text" id="run-text2"></p>
+            </div>
+
+            <!-- Success -->
+            <div id="success" class="hidden success-screen">
+                <div class="big-heart">💖</div>
+                <h2>YAAAY! She said YES!</h2>
+                <p>I knew you would say yes, Pantho!</p>
+                <p>Can't wait to spend forever with you! 💕</p>
+                <p style="margin-top: 20px; font-size: 2rem;">👫💍💒</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let noAttempts1 = 0;
+        let noAttempts2 = 0;
+
+        function runAway(question) {
+            const btn = document.getElementById('noBtn' + question);
+            const text = document.getElementById('run-text' + question);
+            const attempts = question === 1 ? noAttempts1 : noAttempts2;
+            
+            // Random position
+            const maxX = 200;
+            const maxY = 100;
+            const randomX = (Math.random() - 0.5) * maxX;
+            const randomY = (Math.random() - 0.5) * maxY;
+            
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+            // Funny messages
+            const messages = question === 1 ? [
+                "You can't escape! 😏",
+                "Not that easy! 😜",
+                "Try again~ 💕",
+                "No running away! 🏃‍♀️",
+                "Click Yes already! 🥺"
+            ] : [
+                "No backing out now! 😏",
+                "Too late to run! 💍",
+                "You're stuck with me! 😜",
+                "Just say YES! 💕",
+                "I'm not giving up! 🥺"
+            ];
+
+            const idx = question === 1 ? noAttempts1 : noAttempts2;
+            text.textContent = messages[Math.min(idx, messages.length - 1)];
+            
+            if (question === 1) noAttempts1++;
+            else noAttempts2++;
+        }
+
+        function answerYes(question) {
+            if (question === 1) {
+                document.getElementById('q1').classList.add('hidden');
+                document.getElementById('q2').classList.remove('hidden');
+                document.getElementById('progress').style.width = '50%';
+                celebrate();
+            } else {
+                document.getElementById('q2').classList.add('hidden');
+                document.getElementById('success').classList.remove('hidden');
+                document.getElementById('progress').style.width = '100%';
+                celebrateBig();
+            }
+        }
+
+        function celebrate() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => createConfetti(), i * 100);
+            }
+        }
+
+        function celebrateBig() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => createConfetti(), i * 80);
+            }
+        }
+
+        function createConfetti() {
+            const emojis = ['💕', '💗', '💖', '💝', '❤️', '🌹', '💍', '✨', '🎉'];
+            const confetti = document.createElement('div');
+            confetti.className = 'celebration';
+            confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
