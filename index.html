@@ -214,7 +214,6 @@
     <div class="container">
         <div class="photo-frame">
             <div class="photo-inner" id="photo-container">
-                <!-- Uses the requested image, but falls back to emoji if not found in the environment -->
                 <img src="couple.jpg" alt="Us" onerror="document.getElementById('photo-container').innerHTML = '💑'; document.getElementById('photo-container').style.fontSize = '5rem';">
             </div>
         </div>
@@ -250,7 +249,7 @@
             <!-- Success -->
             <div id="success" class="hidden success-screen">
                 <div class="big-heart">💖</div>
-                <h2>YAAAY! She said YES!</h2>
+                <h2>YAAAY! 🎉🥳</h2>
                 <p>I knew you would say yes, Pantho!</p>
                 <p>Can't wait to spend forever with you! 💕</p>
                 <p style="margin-top: 20px; font-size: 2rem;">👫💍💒</p>
@@ -265,9 +264,7 @@
         function runAway(question) {
             const btn = document.getElementById('noBtn' + question);
             const text = document.getElementById('run-text' + question);
-            const attempts = question === 1 ? noAttempts1 : noAttempts2;
             
-            // Random position
             const maxX = 200;
             const maxY = 100;
             const randomX = (Math.random() - 0.5) * maxX;
@@ -275,7 +272,6 @@
             
             btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 
-            // Funny messages
             const messages = question === 1 ? [
                 "You can't escape! 😏",
                 "Not that easy! 😜",
